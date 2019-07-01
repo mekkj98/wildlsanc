@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--@meta-info-->
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--@stylesheet-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/app.css">
+</head>
+
+<body id="app">
+    <!-- @sidebar - for smaller screen, when navbar will be hidden. -->
+    <div class="sidenav left" id="sidenav1">
+        <div class="sidenav-closer">
+            <button onclick="document.getElementById('sidenav1').style.display='none'">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="sidenav-options">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="adoption.html">Adoption</a></li>
+                <li><a href="strength.html">Strength</a></li>
+                <li><a href="endangerd.html">Endangerd</a></li>
+                <li><a href="visit-us.html">Visit Us</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="donation.html" class="active">Donate</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- @end-sidebar -->
+
+    <!-- @header or navbar - when screen is large enough to show navigation horizontal. -->
+    <header class="header" id="header">
+        <div class="hwrap">
+            <nav class="navbar flex margin-auto">
+                <div class="navbar-left flex">
+                    <div class="navbar-item-logo">
+                        <a href="index.html" class="navbar-logo-img">
+                            <img src="assets/images/logo/logo.jpg" alt="" srcset="">
+                        </a>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="navbar-toggle">
+                        <a href="javascript:void(0)"
+                            onclick="document.querySelector('#sidenav1').style.display='block'">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </div>
+                    <div class="navbar-right-options">
+                        <a href="index.html" class="drop-inline-links">Home</a>
+                        <div class="nav-dropdown">
+                            <button class="nav-dropdown-btn">Gallery</button>
+                            <div class="nav-dropdown-content">
+                                <ul class="nav-dropdown-menu">
+                                    <li><a href="gallery.html#animals">Animals</a></li>
+                                    <li><a href="gallery.html#birds">Birds</a></li>
+                                    <li><a href="gallery.html">All</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="donation.html" class="drop-inline-links">Donate</a>
+                        <a href="adoption.html" class="drop-inline-links">Adopte</a>
+                        <div class="nav-dropdown">
+                            <button class="nav-dropdown-btn">More</button>
+                            <div class="nav-dropdown-content">
+                                <ul class="nav-dropdown-menu">
+                                    <li><a href="strength.html">Strength</a></li>
+                                    <li><a href="endangerd.html">Endangerd</a></li>
+                                    <li><a href="visit-us.html">Visit Us</a></li>
+                                    <li><a href="about-us.html">About Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="angular-app" ng-app="myApp" ng-controller="myCtrl">
+
+        <div class="wcards">
+            <div class="wcards-content">
+                <h3 style="margin: 70px auto;font-size: 45px;text-align: center;">Current Animal Strength</h3>
+                <div class="fle">
+                    <select ng-model="sort">
+                        <option value="">Sort By</option>
+                        <option value="name">Name</option>
+                        <option value="total">Count</option>
+                    </select>
+                </div>
+                <div class="wi-card" ng-repeat="d in data['animals'] |orderBy: sort">
+                    <div class="wic-container">
+                        <div class="wic-head">
+                            <div class="wich-img">
+                                <img src="{{d.img}}" alt="" srcset="">
+                            </div>
+                        </div>
+                        <div class="wic-content">
+                            <a href="#" class="an-cat-data" ng-click="buildModal({{d}})">{{d.name}}
+                                <span>({{d.total}})</span></a>
+                            <table>
+                                <tr>
+                                    <th>Age range</th>
+                                    <th>Count</th>
+                                </tr>
+                                <tr>
+                                    <td>0-2</td>
+                                    <td>{{d['age_list'][0]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>2-5</td>
+                                    <td>{{d['age_list'][1]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>5-7</td>
+                                    <td>{{d['age_list'][2]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>7+</td>
+                                    <td>{{d['age_list'][3]}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- @LIGHTBOX-->
+    <div class="light-box" id="LighBox">
+        <div class="light-box-wrapper">
+            <div class="light-box-content">
+                <span class="close-btn">&times</span>
+                <img src=alt="" id="lightImg">
+            </div>
+        </div>
+    </div>
+    <!-- @END-LIGHTBOX-->
+
+    <!-- @footer-->
+    <footer class="footer">
+        <div class="footerh">
+            <div class="logo">
+                <a href="">
+                    <img src="assets/images/logo/logo.jpg" alt="">
+                </a>
+            </div>
+            <center>
+                <div>Copyright © 2018 wildlife.com.</div>
+            </center>
+        </div>
+        <div class="footerm">
+            <ul class="social">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="adoption.html">Adoption</a></li>
+                <li><a href="strength.html">Strength</a></li>
+                <li><a href="endangerd.html">Endangerd</a></li>
+                <li><a href="visit-us.html">Visit Us</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="donation.html" class="active">Donate</a></li>
+            </ul>
+        </div>
+        <div class="footerm">
+            <ul>
+                <li>
+                    <a title="twitter" href="https://twitter.com/wildlife" target="_blank">
+                        <img src="assets/images/icons/twitter.png">
+                    </a>
+                </li>
+                <li>
+                    <a title="facebook" href="https://facebook.com/wildlife" target="_blank">
+                        <img src="assets/images/icons/facebook.png">
+                    </a>
+                </li>
+                <li>
+                    <a title="google plus" href="https://plus.google.com/wildlife" target="_blank">
+                        <img src="assets/images/icons/google-plus.png">
+                    </a>
+                </li>
+                <li>
+                    <a title="instagram" href="https://instagram.com/wildlife" target="_blank">
+                        <img src="assets/images/icons/instagram.png">
+                    </a>
+                </li>
+                <li>
+                    <a title="wildlife" href="about-us.html" target="_blank">
+                        <img src="assets/images/logo/logo_sm.jpg">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- @end-footer -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script>window.angular || document.write('<script src="assets/scripts/vendor/angular-1.7.5.min.js"><\/script>')</script>
+    <script src="./assets/scripts/app.js"></script>
+    <script src="./assets/scripts/ng-app.js"></script>
+</body>
+
+</html>
